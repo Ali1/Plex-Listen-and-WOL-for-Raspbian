@@ -1,6 +1,6 @@
 # Plex Listen and WOL for Raspbian
 
-## 1. Install Plex
+## Install Plex
 
 (Thanks to https://thepi.io/how-to-set-up-a-raspberry-pi-plex-server/)
 ```
@@ -16,21 +16,10 @@ sudo reboot
 ```
 Then go to http://localhost:32400/web/index.html and log in to your Plex account
 ```
-sudo service plexmediaserver stop
-0 0 * * * service plexmediaserver start >/dev/null 2>&1
-0 5 * * * service plexmediaserver stop >/dev/null 2>&1
-
-```
-The above will start Plex for a couple of minutes every day just to keep it registered with the Plex servers.
-
-## 2. Install the sniffers
-```
-sudo apt-get install -t jessie libpcap-dev
-sudo pip install -U pip
-sudo pip install scapy IPython
+sudo service plexmediaserver stop # will be started for a minute every day just to keep the account updated
 ```
 
-## 3. Clone the files
+## Clone the files
 ```
 git clone https://github.com/Ali1/Plex-Listen-and-WOL-for-Raspbian.git
 cd Plex-Listen-and-WOL-for-Raspbian
@@ -41,11 +30,14 @@ sudo systemctl daemon-reload
 sudo systemctl enable plexlistenandwol.service
 sudo systemctl start plexlistenandwol.service
 ```
-## 4 Set the MAC address
+## Configure
 ```sudo nano plexlistenandwol.py```
 Change ```conf.mac``` to the mac address of the PC to wake up.
 
+*The PC's Plex should be configured for a different IP address than 32400 to allow for external connections on both the Pi and the PC*
+
+## 
+
 ## TO DO
-1. Sniffer to just sniff what's coming to itself. Alternatively sniff the network without installing Plex on Pi
-2. Pushbullet notifcation when action takes place and/or other logging
-3. Sleep after WOL
+- Pushbullet notifcation when action takes place and/or other logging
+- Check if PC active and if it is, don't even open sockets
