@@ -48,7 +48,7 @@ sudo systemctl status plexlistenandwol.service # to check status any time
 ```sudo nano plexlistenandwol.py```
 Change ```conf.mac``` to the mac address of the PC to wake up.
 
-*The PC's Plex should be configured for a different IP address than 32400 to allow for external connections on both the Pi and the PC*
+*The PC's Plex should be configured for a different port than 32400 to allow for external connections on both the Pi and the PC*
 
 ## 
 
