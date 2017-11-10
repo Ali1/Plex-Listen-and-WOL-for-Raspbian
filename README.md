@@ -15,7 +15,13 @@ sudo nano /boot/cmdline.txt # At the bottom of the command line text file, type 
 sudo reboot
 ```
 Then go to http://localhost:32400/web/index.html and log in to your Plex account
+```
+sudo service plexmediaserver stop
+0 0 * * * service plexmediaserver start >/dev/null 2>&1
+0 5 * * * service plexmediaserver stop >/dev/null 2>&1
 
+```
+The above will start Plex for a couple of minutes every day just to keep it registered with the Plex servers.
 
 ## 2. Install the sniffers
 ```
@@ -40,7 +46,6 @@ sudo systemctl start plexlistenandwol.service
 Change ```conf.mac``` to the mac address of the PC to wake up.
 
 ## TO DO
-1. Turn Plex off and just touch it on and off occasionally
-2. Sniffer to just sniff what's coming to itself. Alternatively sniff the network without installing Plex on Pi
-3. Pushbullet notifcation when action takes place and/or other logging
-4. Sleep after WOL
+1. Sniffer to just sniff what's coming to itself. Alternatively sniff the network without installing Plex on Pi
+2. Pushbullet notifcation when action takes place and/or other logging
+3. Sleep after WOL
