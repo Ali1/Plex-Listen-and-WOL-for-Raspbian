@@ -28,9 +28,7 @@ sudo pip install scapy socket IPython
 ```
 git clone https://github.com/Ali1/Plex-Listen-and-WOL-for-Raspbian.git
 cd Plex-Listen-and-WOL-for-Raspbian
-sudo chmod 644 plexlistenandwol.service
-ln -s plexlistenandwol.service /lib/systemd/system/plexlistenandwol.service
-sudo chmod 644 /lib/systemd/system/plexlistenandwol.service
+sudo ln -s plexlistenandwol.service /lib/systemd/system/plexlistenandwol.service
 sudo chmod 644 /lib/systemd/system/plexlistenandwol.service
 chmod +x plexlistenandwol.py
 sudo systemctl daemon-reload
