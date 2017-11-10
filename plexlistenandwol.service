@@ -1,0 +1,11 @@
+[Unit]
+Description=Listens for any activity on port 32400 and pushes out a WOL to plex PC if so
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/pi/Plex-Listen-and-WOL-for-Raspbian/plexlistenandwol.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
