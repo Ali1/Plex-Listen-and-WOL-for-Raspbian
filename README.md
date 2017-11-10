@@ -38,3 +38,9 @@ sudo systemctl start plexlistenandwol.service
 ## 4 Set the MAC address
 ```sudo nano plexlistenandwol.py```
 Change ```conf.mac``` to the mac address of the PC to wake up.
+
+## TO DO
+1. Turn Plex off and just touch it on and off occasionally
+2. Sniffer to just sniff what's coming to itself. Alternatively sniff the network without installing Plex on Pi
+3. Pushbullet notifcation when action takes place and/or other logging
+4. Sleep after WOL
