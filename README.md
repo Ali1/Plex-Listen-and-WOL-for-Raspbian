@@ -35,3 +35,6 @@ sudo systemctl daemon-reload
 sudo systemctl enable plexlistenandwol.service
 sudo systemctl start plexlistenandwol.service
 ```
+## 4 Set the MAC address
+```sudo nano plexlistenandwol.py```
+Change ```conf.mac``` to the mac address of the PC to wake up.
