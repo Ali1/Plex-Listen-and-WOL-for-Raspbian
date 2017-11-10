@@ -1,4 +1,15 @@
-# Plex Listen and WOL for Raspbian
+# Plex Listen and WOL (Wake-On-Lan) for Raspbian
+
+The Plex python script is designed to run as an autostart daemon on Rasperry Pi to aid a PC on the network that would like to get some sleep but and be awoken as soon as someone wants to connect to Raspberry Pi. It works automatically with mobiles, TVs etc. whether in the local networks or outside.
+
+It works by registering the Pi as a Plex server and pretending you have an extra Plex server there. When a client such as a mobile device tried to find all the Plex servers, it will try to connect to the Rasperry Pi, at this point the Raspberry Pi sends some WOLs out to the PC to wake it up.
+
+It works 23 hours and 58 minutes a day as it spends 2 minutes a day starting Plex temporarily to keep it activated with the Plex account.
+
+## Pre-requisites
+- I don't have a multiuser Plex set up so have not tried if it works with that set up
+- WOL only works on LAN. My networks works even if the Pi is on wifi as long as the PC is connected through LAN. The PC may need bios configuration to allow Wake-On-Lan
+- I have a powerline adapter just to get ethernet. It's slower so I still use Wifi on my PC and prioritise traffic to get through Wifi but the LAN is connected so the WOLs can come through
 
 ## Install Plex
 
@@ -17,6 +28,8 @@ sudo reboot
 Then go to http://localhost:32400/web/index.html and log in to your Plex account
 ```
 sudo service plexmediaserver stop # will be started for a minute every day just to keep the account updated
+sudo update-rc.d -f plexmediaserver remove
+grep -nrI Default-Start /etc/init.d # to check its not being autostarted
 ```
 
 ## Clone the files
@@ -29,6 +42,7 @@ chmod +x plexlistenandwol.py
 sudo systemctl daemon-reload
 sudo systemctl enable plexlistenandwol.service
 sudo systemctl start plexlistenandwol.service
+sudo systemctl status plexlistenandwol.service # to check status any time
 ```
 ## Configure
 ```sudo nano plexlistenandwol.py```
