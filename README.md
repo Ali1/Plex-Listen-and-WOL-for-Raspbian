@@ -21,7 +21,7 @@ Then go to http://localhost:32400/web/index.html and log in to your Plex account
 ```
 sudo apt-get install -t jessie libpcap-dev
 sudo pip install -U pip
-sudo pip install scapy socket IPython
+sudo pip install scapy IPython
 ```
 
 ## 3. Clone the files
