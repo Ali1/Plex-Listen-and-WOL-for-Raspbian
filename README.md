@@ -10,8 +10,7 @@ This used to work by keep Plex open and having a sniffer, but that used up too m
 
 ## Pre-requisites
 - I don't have a multiuser Plex set up so have not tried if it works with that set up
-- WOL only works on LAN. My networks works even if the Pi is on wifi as long as the PC is connected through LAN. The PC may need bios configuration to allow Wake-On-Lan
-- I have a powerline adapter just to get ethernet. It's slower so I still use Wifi on my PC and prioritise traffic to get through Wifi but the LAN is connected so the WOLs can come through
+- WOL only works if the Plex server PC is LAN (ethernet) connected. In my own network, my PC is connected on both Wifi (faster) and Ethernet (through a slow bug reliable powerline adapter). The PC may need bios configuration to allow Wake-On-Lan so that packets successfully power on the PC.
 - You will need port forwarding for both the Pi (port 32400) and the PC (choose a different port) for this to work externally.
 
 ## Install Plex
