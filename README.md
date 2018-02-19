@@ -1,12 +1,23 @@
 # Plex Listen and WOL (Wake-On-Lan) for Raspbian
 
-The Plex python script is designed to run as an autostart daemon on Rasperry Pi to aid a PC on the network that would like to get some sleep but and be awoken as soon as someone wants to connect to Raspberry Pi. It works automatically with mobiles, TVs etc. whether in the local networks or outside.
+## The idea
+
+- When set up, you will have a new Plex server on your Plex account. Call it "X Rasperry Pi Server". This will usually be disconnected and greyed out on your Plex app/TV
+- When you open your Plex account on your phone app or TV, inside or outside the house, your phone app/TV tries to connect to the RaspberryPi. This is enough for this script to know you want Plex.
+- So the script tells your PC to wake up (using a feature called Wake-On-Lan or WOL. Hopefully, if your PC is connected to the network by ethernet, it responds.
+- Within a few seconds, you app/TV should see your PC's Plex server
+
+## How it works
+
+You will need to install Plex on the RasperryPi. If you follow the instruction, it should be turned off and this script will be responsible for switching it on once in a while just so Plex knows the IP address of a RaspberryPi and that it still exists.
+
+The Plex python script is designed to run as an autostart daemon on Rasperry Pi.
 
 It works by registering the Pi as a Plex server and pretending you have an extra Plex server there. When a client such as a mobile device tried to find all the Plex servers, it will try to connect to the Rasperry Pi, at this point the Raspberry Pi sends some WOLs out to the PC to wake it up.
 
 It works 23 hours and 58 minutes a day as it spends 2 minutes a day starting Plex temporarily to keep it activated with the Plex account.
 
-This used to work by keep Plex open and having a sniffer, but that used up too much resources.
+The old way I used to do things was to have a network sniffer on the RaspberryPi, but that used up too much resources (I think?). I like this way now.
 
 ## Pre-requisites
 - I don't have a multiuser Plex set up so have not tried if it works with that set up
