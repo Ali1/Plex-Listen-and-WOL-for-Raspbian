@@ -2,27 +2,25 @@
 
 ## The idea
 
-- When set up, you will have a new Plex server on your Plex account. Call it "X Rasperry Pi Server". This will usually be disconnected and greyed out on your Plex app/TV
-- When you open your Plex account on your phone app or TV, inside or outside the house, your phone app/TV tries to connect to the RaspberryPi. This is enough for this script to know you want Plex.
-- So the script tells your PC to wake up (using a feature called Wake-On-Lan or WOL. Hopefully, if your PC is connected to the network by ethernet, it responds.
-- Within a few seconds, you app/TV should see your PC's Plex server
+- When set up, you will have a new Plex server on your Plex account. Call it "X Rasperry Pi Server". This will usually be disconnected and greyed out on your server list in the Plex Mobile/TV app because the Raspberry Pi does not need an actively running Plex Server.
+- While it is greyed out, your Plex Mobile/TV app will still try to connect to all Plex servers added to your Plex account. This will be your PC (which is currently sleeping and so it will not respond) and the Raspberry Pi which also does not have a Plex server running so also will not respond.
+- However my script running on your Pi will be able to detect that connection attempt and will tell your PC to wake up (using a feature called Wake-On-Lan or WOL). Hopefully, if your PC is connected to the network by ethernet and the Raspberry Pi is also located within the network (Wifi or ethernet, doesn't matter), the PC will begin to wake up and the Plex server can start responding.
+- Within a few seconds, your Plex Mobile/TV app should see your PC's Plex server
 
 ## How it works
 
-You will need to install Plex on the RasperryPi. If you follow the instruction, it should be turned off and this script will be responsible for switching it on once in a while just so Plex knows the IP address of a RaspberryPi and that it still exists.
+You will need to install Plex on the RasperryPi. I have provided instructions below. I have also provided instructions to make sure Plex does not run automatically at startup. It is just installed to say hi to the Plex network so your Raspberry Pi can be linked to your Plex account. To keep it linked, my script will also periodically start the Plex server so it can say hi to the Plex network and keep the IP address of your Pi fresh.
 
-The Plex python script is designed to run as an autostart daemon on Rasperry Pi.
-
-It works by registering the Pi as a Plex server and pretending you have an extra Plex server there. When a client such as a mobile device tried to find all the Plex servers, it will try to connect to the Rasperry Pi, at this point the Raspberry Pi sends some WOLs out to the PC to wake it up.
+My Plex python script is designed to run as an autostart daemon on Rasperry Pi. It listens on port 32400 (the port that Plex usually listens to) and when a client such as a mobile device tried to find the Raspberry Pi Plex server, it wouldn't respond normally but it will trigger an attempt to connect to the send some WOL signals out to the PC to wake it up.
 
 It works 23 hours and 58 minutes a day as it spends 2 minutes a day starting Plex temporarily to keep it activated with the Plex account.
 
-The old way I used to do things was to have a network sniffer on the RaspberryPi, but that used up too much resources (I think?). I like this way now.
+The old way I used to do things was to have a network sniffer on the RaspberryPi to listen to connection attempts directly to the PC, but that used up too much resources (I think?). I like this way now.
 
 ## Pre-requisites
 - I don't have a multiuser Plex set up so have not tried if it works with that set up
-- WOL only works if the Plex server PC is LAN (ethernet) connected. In my own network, my PC is connected on both Wifi (faster) and Ethernet (through a slow bug reliable powerline adapter). The PC may need bios configuration to allow Wake-On-Lan so that packets successfully power on the PC.
-- You will need port forwarding for both the Pi (port 32400) and the PC (choose a different port) for this to work externally.
+- WOL only works if the Plex server PC is LAN (ethernet) connected. In my own network, my PC is connected on both Wifi (faster) and Ethernet (through a slow bug reliable powerline adapter). The Raspberry Pi is connected by Wifi. The PC may need bios configuration to enable Wake-On-Lan so that packets successfully wake the PC from sleep.
+- You will need port forwarding for both the Pi (port 32400) and the PC (choose a different port in Plex settings) for this to work externally.
 
 ## Install Plex
 
