@@ -15,7 +15,9 @@ My Plex python script is designed to run as an autostart daemon on Rasperry Pi. 
 
 It works 23 hours and 58 minutes a day as it spends 2 minutes a day starting Plex temporarily to keep it activated with the Plex account.
 
-The old way I used to do things was to have a network sniffer on the RaspberryPi to listen to connection attempts directly to the PC, but that used up too much resources (I think?). I like this way now.
+The old way I used to do things was to have a network sniffer on the RaspberryPi to listen to connection attempts directly to the PC, but that felt dirty. I like this way now.
+
+You may have to occasionally manually stop the service, start Plex on the raspberry pi and navigate to 127.0.0.1:32400 to refresh the login session and keep the pi connected to your Plex account.
 
 ## Pre-requisites
 - I don't have a multiuser Plex set up so have not tried if it works with that set up
@@ -47,7 +49,7 @@ grep -nrI Default-Start /etc/init.d # to check its not being autostarted
 ```
 git clone https://github.com/Ali1/Plex-Listen-and-WOL-for-Raspbian.git
 cd Plex-Listen-and-WOL-for-Raspbian
-sudo ln -s plexlistenandwol.service /lib/systemd/system/plexlistenandwol.service
+sudo ln -s plexlistenandwol.service /lib/systemd/system/plexlistenandwol.servic e
 sudo chmod 644 /lib/systemd/system/plexlistenandwol.service
 chmod +x plexlistenandwol.py
 sudo systemctl daemon-reload
