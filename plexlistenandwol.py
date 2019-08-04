@@ -70,30 +70,30 @@ def main():
     while True:
         now = datetime.datetime.now()
         if now.hour==9 and now.minute==49 and first_run==0:
-            logger.info("shutting sockets down to prepare for plex");
+            logging.info("shutting sockets down to prepare for plex");
             try:
                 s.shutdown(socket.SHUT_RDWR)
             except:
                 pass
             s.close()
             time.sleep(60)
-            logger.info("starting plex for 60 seconds");
+            logging.info("starting plex for 60 seconds");
             os.system("sudo service plexmediaserver start")
             time.sleep(60)
-            logger.info("stopping plex");
+            logging.info("stopping plex");
             os.system("sudo service plexmediaserver stop")
             time.sleep(60)
-            logger.info("re-opening sockets")
+            logging.info("re-opening sockets")
             s = socket.socket(socket.AF_INET,
                               socket.SOCK_STREAM)
             s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR, 1)
             try:
                 s.bind((host, port))
             except:
-                logger.error("Did not work, trying to kill processes hogging port 32400")
+                logging.error("Did not work, trying to kill processes hogging port 32400")
                 os.system("pid=$(lsof -i:32400 -t); kill -TERM $pid || kill -KILL $pid")
                 time.sleep(45)
-                logger.info("Ok, last try")
+                logging.info("Ok, last try")
                 s.bind((host, port))
             s.settimeout(45);
             s.listen(1) # up to 2 connections
@@ -105,7 +105,7 @@ def main():
         except:
             raise
         else:
-            logger.info("got a connection from %s" % str(addr))
+            logging.info("got a connection from " + str(addr))
             clientSocket.close()
             wake_on_lan(conf.mac)
             time.sleep(1)
@@ -121,9 +121,8 @@ def main():
             time.sleep(1)
             logging.info('sent 6 WOLs to ' + conf.mac + '. Now sleeping');
             time.sleep(10)
-    logger.info("dying")
+    logging.info("dying")
 
 
 if __name__ == "__main__":
    main()
-
