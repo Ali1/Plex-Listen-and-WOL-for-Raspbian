@@ -49,7 +49,7 @@ grep -nrI Default-Start /etc/init.d # to check its not being autostarted
 ```
 git clone https://github.com/Ali1/Plex-Listen-and-WOL-for-Raspbian.git
 cd Plex-Listen-and-WOL-for-Raspbian
-sudo ln -s plexlistenandwol.service /lib/systemd/system/plexlistenandwol.servic e
+sudo ln -s plexlistenandwol.service /lib/systemd/system/plexlistenandwol.service
 sudo chmod 644 /lib/systemd/system/plexlistenandwol.service
 chmod +x plexlistenandwol.py
 sudo systemctl daemon-reload
