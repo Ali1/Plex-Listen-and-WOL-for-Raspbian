@@ -17,7 +17,7 @@ It works 23 hours and 58 minutes a day as it spends 2 minutes a day starting Ple
 
 The old way I used to do things was to have a network sniffer on the RaspberryPi to listen to connection attempts directly to the PC, but that felt dirty. I like this way now.
 
-You may have to occasionally manually stop the service, start Plex on the raspberry pi and navigate to 127.0.0.1:32400 to refresh the login session and keep the pi connected to your Plex account.
+You may have to occasionally manually stop the service, start Plex on the raspberry pi and navigate to 127.0.0.1:32400 to refresh the login session and keep the pi connected to your Plex account (see Section, Running Plex temporarily)
 
 ## Pre-requisites
 - I don't have a multiuser Plex set up so have not tried if it works with that set up
@@ -62,6 +62,18 @@ sudo systemctl status plexlistenandwol.service # to check status any time
 Change ```conf.mac``` to the mac address of the PC to wake up.
 
 *The PC's Plex should be configured for a different port than 32400 to allow for external connections on both the Pi and the PC*
+
+## Running Plex Temporarily
+If you need to re-login to your Plex account on the Pi, or otherwise need to change other settings, you may need to run the Plex server properly on the pi. To do this follow these steps:
+```
+sudo systemctl stop plexlistenandwol.service # stop the listener
+sudo systemctl start plexmediaserver.service # Start Plex
+
+# Now navigate to [IP of RaspberryPi]:32400 or if you using a browser on the Pi 127.0.0.1:32400
+
+sudo systemctl stop plexmediaserver.service # Stop Plex
+sudo systemctl start plexlistenandwol.service # start this app
+```
 
 ## 
 
