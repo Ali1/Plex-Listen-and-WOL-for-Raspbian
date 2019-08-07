@@ -14,7 +14,9 @@ As well as this script running on your Respberry Pi, you will also install and s
 
 To keep the fake Plex Media Server ploy going, this script will run the Plex Media Server for a few minutes a day to keep in touch with your Plex account.
 
-## Installation Step 1: Install Plex
+## Installation
+
+### Step 1: Install Plex
 
 (Thanks to https://thepi.io/how-to-set-up-a-raspberry-pi-plex-server/)
 ```
@@ -35,7 +37,7 @@ sudo update-rc.d -f plexmediaserver remove # stop auto-start
 grep -nrI Default-Start /etc/init.d # check in here that its not being autostarted
 ```
 
-## Clone the files
+### Step 2: Clone the files
 ```
 git clone https://github.com/Ali1/Plex-Listen-and-WOL-for-Raspbian.git
 cd Plex-Listen-and-WOL-for-Raspbian
@@ -46,7 +48,7 @@ sudo systemctl daemon-reload
 sudo systemctl enable plexlistenandwol.service
 ````
 
-## Configure
+### Step 3: Configure
 ```
 sudo mv config.ini.new config.ini
 sudo nano config.ini
@@ -55,7 +57,7 @@ Change the mac address to the mac address of the PC to wake up (remember to use 
 
 *The PC's Plex should be configured for a different port than 32400 to allow for external connections on both the Pi and the PC*
 
-## Start the service
+### Step 4: Start the service
 ```
 sudo systemctl start plexlistenandwol.service
 sudo systemctl status plexlistenandwol.service # to check status any time
