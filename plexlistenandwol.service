@@ -4,6 +4,7 @@ After=multi-user.target
 
 [Service]
 Type=simple
+WorkingDirectory=/home/pi/Plex-Listen-and-WOL-for-Raspbian/
 ExecStart=/usr/bin/python /home/pi/Plex-Listen-and-WOL-for-Raspbian/plexlistenandwol.py
 Restart=on-abort
 

@@ -7,26 +7,37 @@ import os
 import datetime
 import subprocess
 import logging
+from logging.handlers import RotatingFileHandler
+from logging import handlers
 import socket
-from sys import exit
+import sys
 import argparse
 from subprocess import Popen, PIPE
 from wol import * # ali
 import time
+import ConfigParser
 class Object(object):
     pass # for conf
-conf=Object()
-conf.mac = '60:45:cb:82:06:d0' # ali
+config = ConfigParser.ConfigParser()
+config.read('config.ini')
 
-logging.basicConfig(
-    level=logging.DEBUG,
-    format="%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s",
-    handlers=[
-        logging.FileHandler("app.log"),
-        logging.StreamHandler()
-    ])
+if not config.has_option('DEFAULT', 'RealPlexServerMac'):
+    exit('No config file, ensure you have renamed config.ini.new')
+    
+print(config.get('DEFAULT', 'RealPlexServerMac'));
 
-logging.basicConfig(filename='app.log', filemode='w', format='%(nprintame)s - %(levelname)s - %(message)s', level=logging.DEBUG)
+log = logging.getLogger('')
+log.setLevel(logging.DEBUG)
+format = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+
+ch = logging.StreamHandler(sys.stdout)
+ch.setFormatter(format)
+log.addHandler(ch)
+
+fh = handlers.RotatingFileHandler('app.log', maxBytes=(1048576*5), backupCount=7)
+fh.setFormatter(format)
+log.addHandler(fh)
+
 
 
 def main():
@@ -107,19 +118,19 @@ def main():
         else:
             logging.info("got a connection from " + str(addr))
             clientSocket.close()
-            wake_on_lan(conf.mac)
+            wake_on_lan(config.get('DEFAULT', 'RealPlexServerMac'))
             time.sleep(1)
-            wake_on_lan(conf.mac)
+            wake_on_lan(config.get('DEFAULT', 'RealPlexServerMac'))
             time.sleep(1)
-            wake_on_lan(conf.mac)
+            wake_on_lan(config.get('DEFAULT', 'RealPlexServerMac'))
             time.sleep(1)
-            wake_on_lan(conf.mac)
+            wake_on_lan(config.get('DEFAULT', 'RealPlexServerMac'))
             time.sleep(1)
-            wake_on_lan(conf.mac)
+            wake_on_lan(config.get('DEFAULT', 'RealPlexServerMac'))
             time.sleep(1)
-            wake_on_lan(conf.mac)
+            wake_on_lan(config.get('DEFAULT', 'RealPlexServerMac'))
             time.sleep(1)
-            logging.info('sent 6 WOLs to ' + conf.mac + '. Now sleeping');
+            logging.info('sent 6 WOLs to ' + config.get('DEFAULT', 'RealPlexServerMac') + '. Now sleeping');
             time.sleep(10)
     logging.info("dying")
 
