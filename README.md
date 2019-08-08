@@ -81,3 +81,4 @@ It's in the app.log file.
 ## TO DO
 - Pushbullet notifcation when action takes place and/or other logging
 - Check if PC active and if it is, don't even open sockets
+- Explore keeping the fake Plex Media Server active and monitoring `/var/lib/plexmediaserver/Library/Application Support/Plex Media Server/Logs/Plex Media Server.log` (filter out all lines except ones that contain HTTP).
