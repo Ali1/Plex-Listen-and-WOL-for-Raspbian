@@ -1,5 +1,7 @@
 # Plex Listen and WOL (Wake-On-Lan) for Raspbian
 
+ARCHIVED - USE THIS METHOD INSTEAD: https://github.com/Ali1/PlexLocalWOL
+
 If you have a raspberry pi, why not save some energy and allow the server that hosts a Plex Media Server to go to sleep! The Raspberry Pi will sit on your network listening for incoming Plex connections and then wake your real Plex Media Server up when needed (e.g. when you open your Plex app on your mobile when you're in another country!).
 
 ## Pre-requisites
